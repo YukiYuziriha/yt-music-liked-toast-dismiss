@@ -2,6 +2,8 @@
 
 Small Chrome extension that auto-dismisses the "Saved to liked music" pop-up message on YouTube Music.
 
+![YouTube Music pop-up auto-dismiss screenshot](./maxi%20screen.png)
+
 ## What it does
 - Watches for the YouTube Music pop-up container.
 - Verifies the message text matches "Saved to liked music".
