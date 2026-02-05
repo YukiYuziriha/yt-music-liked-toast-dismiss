@@ -1,15 +1,39 @@
 (() => {
-  const TOAST_SELECTOR = 'tp-yt-paper-toast#toast';
+  const TOAST_SELECTOR = 'tp-yt-paper-toast';
   const TEXT_SELECTOR = 'yt-formatted-string#text';
-  const CLOSE_SELECTOR = 'yt-icon-button#close-button button';
+  const CLOSE_SELECTOR = 'button[aria-label="Dismiss"], yt-icon-button#close-button, yt-icon-button#close-button button';
   const TARGET_TEXT = 'Saved to liked music';
+
+  const queryAllDeep = (root, selector) => {
+    const results = [];
+    if (!root) {
+      return results;
+    }
+
+    if (root.querySelectorAll) {
+      results.push(...root.querySelectorAll(selector));
+    }
+
+    const treeWalker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT);
+    let node = treeWalker.currentNode;
+    while (node) {
+      if (node.shadowRoot) {
+        results.push(...queryAllDeep(node.shadowRoot, selector));
+      }
+      node = treeWalker.nextNode();
+    }
+
+    return results;
+  };
+
+  const queryDeep = (root, selector) => queryAllDeep(root, selector)[0] || null;
 
   const matchesTargetToast = (toast) => {
     if (!toast) {
       return false;
     }
 
-    const textNode = toast.querySelector(TEXT_SELECTOR);
+    const textNode = queryDeep(toast, TEXT_SELECTOR);
     const text = textNode ? textNode.textContent.trim() : '';
     return text === TARGET_TEXT;
   };
@@ -19,7 +43,7 @@
       return false;
     }
 
-    const closeButton = toast.querySelector(CLOSE_SELECTOR);
+    const closeButton = queryDeep(toast, CLOSE_SELECTOR);
     if (!closeButton) {
       return false;
     }
@@ -29,8 +53,12 @@
   };
 
   const attemptDismiss = () => {
-    const toast = document.querySelector(TOAST_SELECTOR);
-    return dismissToast(toast);
+    const toasts = queryAllDeep(document, TOAST_SELECTOR);
+    let dismissed = false;
+    toasts.forEach((toast) => {
+      dismissed = dismissToast(toast) || dismissed;
+    });
+    return dismissed;
   };
 
   const start = () => {
