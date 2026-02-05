@@ -33,17 +33,19 @@
     return dismissToast(toast);
   };
 
-  const observer = new MutationObserver(() => {
-    attemptDismiss();
-  });
-
   const start = () => {
     const root = document.documentElement || document.body;
     if (!root) {
       return;
     }
 
+    const observer = new MutationObserver(() => {
+      attemptDismiss();
+    });
+
     observer.observe(root, { childList: true, subtree: true });
+
+    setInterval(attemptDismiss, 500);
     attemptDismiss();
   };
 
