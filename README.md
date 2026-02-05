@@ -10,12 +10,14 @@ Small Chrome extension that auto-dismisses the "Saved to liked music" pop-up mes
 - Clicks the close (X) button immediately.
 
 ## Install (local)
-1. Get the files:
+1. Get the files (pick one):
    - Git: `git clone https://github.com/YukiYuziriha/yt-music-liked-toast-dismiss.git`
    - Or download the ZIP from GitHub and unzip it.
-2. Open Chrome and go to `chrome://extensions`.
-3. Enable "Developer mode".
-4. Click "Load unpacked" and select the folder that contains `manifest.json`.
+2. You should now have a folder named `yt-music-liked-toast-dismiss`.
+3. Open Chrome and go to `chrome://extensions`.
+4. Turn on "Developer mode" (top right).
+5. Click "Load unpacked".
+6. Select the `yt-music-liked-toast-dismiss` folder (the one that contains `manifest.json`).
 
 ## How it works
 The content script uses a `MutationObserver` to detect when the pop-up appears, then clicks the close button only if the message text is an exact match.
