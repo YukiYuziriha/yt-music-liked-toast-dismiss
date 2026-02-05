@@ -3,6 +3,9 @@
   "name": "YouTube Music Liked Toast Dismiss",
   "version": "1.0.0",
   "description": "Auto-dismisses the 'Saved to liked music' toast on YouTube Music.",
+  "icons": {
+    "128": "icon.svg"
+  },
   "content_scripts": [
     {
       "matches": ["https://music.youtube.com/*"],

@@ -1,0 +1,13 @@
+YouTube Music keeps showing a 'Saved to liked music' toast that never disappears on its own — only this one has an X button and stays forever. This extension clicks that close button for you automatically.
+
+Features:
+- Auto-dismisses only the 'Saved to liked music' toast
+- Runs only on music.youtube.com
+- No permissions beyond content script match
+- Lightweight, zero network access
+
+How it works:
+The extension watches for the toast element to appear, verifies the text matches exactly 'Saved to liked music', then clicks the close button immediately.
+
+Privacy:
+This extension does not collect, store, or transmit any user data. It runs entirely in your browser and only interacts with the YouTube Music page.

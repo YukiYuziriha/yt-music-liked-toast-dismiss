@@ -1,0 +1,1 @@
+Auto-dismiss the persistent 'Saved to liked music' toast on YouTube Music.
